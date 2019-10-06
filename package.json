@@ -1,0 +1,30 @@
+{
+  "name": "vscode-github-stats",
+  "private": true,
+  "description": "A stats dashboard for the VS Code GitHub repo",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve"
+  },
+  "dependencies": {
+    "gatsby": "^2.15.29",
+    "gatsby-theme-github-stats": "^0.5.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lannonbr/vscode-github-stats"
+  },
+  "bugs": {
+    "url": "https://github.com/lannonbr/vscode-github-stats/issues"
+  }
+}

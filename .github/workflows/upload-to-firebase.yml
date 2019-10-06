@@ -1,0 +1,24 @@
+on:
+  schedule:
+    - cron: "22 * * * *"
+name: Upload to Firebase
+jobs:
+  statsPoller:
+    name: Stats Poller
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Stats Poller
+        uses: ./.github/actions/github-poll
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          auth_provider_x509_cert_url: ${{ secrets.auth_provider_x509_cert_url }}
+          auth_uri: ${{ secrets.auth_uri }}
+          client_email: ${{ secrets.client_email }}
+          client_id: ${{ secrets.client_id }}
+          client_x509_cert_url: ${{ secrets.client_x509_cert_url }}
+          private_key: ${{ secrets.private_key }}
+          private_key_id: ${{ secrets.private_key_id }}
+          project_id: ${{ secrets.project_id }}
+          token_uri: ${{ secrets.token_uri }}
+          type: ${{ secrets.type }}
