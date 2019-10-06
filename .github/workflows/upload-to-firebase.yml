@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "26 * * * *"
+    - cron: "40 * * * *"
 name: Upload to Firebase
 jobs:
   statsPoller:
