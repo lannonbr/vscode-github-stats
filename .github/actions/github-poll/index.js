@@ -1,14 +1,14 @@
-const fetch = require("node-fetch");
-const moment = require("moment");
+const fetch = require("node-fetch")
+const moment = require("moment")
 
-const { db } = require("./firebase-wrapper");
+const { db } = require("./firebase-wrapper")
 
-require("dotenv").config();
+require("dotenv").config()
 
 let query = JSON.stringify({
   query: `
     query {
-      repository(owner: "gatsbyjs", name:"gatsby") {
+      repository(owner: "microsoft", name:"vscode") {
         openIssues: issues(states:OPEN) {
           totalCount
         }
@@ -28,34 +28,34 @@ let query = JSON.stringify({
           totalCount
         }
       }
-    }`
-});
+    }`,
+})
 
 function queryGitHub(query) {
-  const url = "https://api.github.com/graphql";
+  const url = "https://api.github.com/graphql"
   const options = {
     method: "POST",
     body: query,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `bearer ${process.env.GITHUB_TOKEN}`
-    }
-  };
+      Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
+    },
+  }
 
   return fetch(url, options)
     .then(resp => resp.json())
     .then(data => {
-      return data.data.repository;
-    });
+      return data.data.repository
+    })
 }
 
 let run = async () => {
-  let resp = await queryGitHub(query);
+  let resp = await queryGitHub(query)
 
-  let now = moment().unix();
+  let now = moment().unix()
 
-  let docRef = db.collection("hourly-stats").doc(now.toString());
+  let docRef = db.collection("hourly-stats").doc(now.toString())
 
   let data = {
     timestamp: now,
@@ -64,10 +64,10 @@ let run = async () => {
     openPRs: resp.openPRs.totalCount,
     closedPRs: resp.closedPRs.totalCount,
     mergedPRs: resp.mergedPRs.totalCount,
-    stars: resp.stargazers.totalCount
-  };
+    stars: resp.stargazers.totalCount,
+  }
 
-  await docRef.set(data);
-};
+  await docRef.set(data)
+}
 
-run();
+run()
