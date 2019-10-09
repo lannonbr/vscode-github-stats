@@ -1,0 +1,18 @@
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+name: Build Site
+jobs:
+  SiteBuilder:
+    name: Site Builder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Build Site
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          yarn
+          yarn build
+          npx netlify-cli deploy --dir=public
