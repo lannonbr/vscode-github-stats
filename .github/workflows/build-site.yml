@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "10 * * * *"
 name: Build Site
 jobs:
   SiteBuilder:
